@@ -2,5 +2,7 @@
   <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-# Here I rant
-here I type whatever I want.
+# Hey, baby
+I love you
+
+yada yada yada...blah blah blahh...
