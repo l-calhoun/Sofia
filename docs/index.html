@@ -275,6 +275,12 @@ footer {
   <div id="quiz-options"></div>
   <div id="quiz-result"></div>
 </section>
+
+<!-- Final Love Note Section -->
+<section id="final-love-note-section" style="display:none; text-align:center;">
+  <h2>My Love Letter to You</h2>
+  <div id="final-love-note" style="max-width: 500px; margin: 0 auto; background: #fffbe7; border-radius: 16px; padding: 24px 20px; color: #7b6cff; font-size: 1.1em; box-shadow: 0 2px 8px #b4a7ff22;"></div>
+</section>
   <footer>
     <p>© Loraine & Sofia 2025</p>
   </footer> 
@@ -289,8 +295,21 @@ footer {
     "Thank you for letting me be your sigma! 🥜🍓"
   ];
 
+  const myLongLoveNote = `
+    Dear Sofia, <br><br>
+    You and I are reaching our third anniversarry, three years together. That's a long time. <br>
+    Thank you for sticking with me for this long, for your undying patience, your love, and your understanding. <br>
+    Baby, you complete me, I hope I give you the same contentment as you give me. <br>
+    I hope to spend the next coming years with you, and that this website was an adequate showcase of my love for you. <br>  
+    <br><br>
+    I love you more than words can say. Thank you for being my girlfriend. 
+  `;
+
   let loveCount = 0;
   let taskCompleted = false;
+  let loveInputDone = false;
+  let memoryDone = false;
+  let quizDone = false;
 
   document.addEventListener('DOMContentLoaded', () => {
     // --- Timer ---
@@ -340,6 +359,8 @@ footer {
         if (loveCount === 3) {
           document.getElementById('love-message').innerHTML = 'Congratulations! You did it! <span class="bouncy-heart" style="font-size:2em;">❤️</span>';
           taskCompleted = true;
+          loveInputDone = true;
+          checkAllTasksDone();
         }
       } else {
         document.getElementById('love-message').innerHTML = `<span style="color:#ff69b4;">Please type exactly: I love you</span>`;
@@ -405,7 +426,9 @@ footer {
           matchedPairs++;
           if (matchedPairs === emojis.length / 2) {
             taskCompleted = true;
+            memoryDone = true;
             showLoveNoteChoices();
+            checkAllTasksDone();
           }
           resetMemoryTurn();
         } else {
@@ -474,6 +497,8 @@ footer {
         document.getElementById('quiz-options').innerHTML = "";
         document.getElementById('quiz-result').textContent = `You got ${quizScore} out of ${quizQuestions.length} correct!`;
         taskCompleted = true;
+        quizDone = true;
+        checkAllTasksDone();
         return;
       }
       const q = quizQuestions[quizIndex];
@@ -501,6 +526,14 @@ footer {
 
     showQuizQuestion();
   });
+
+  function checkAllTasksDone() {
+    if (loveInputDone && memoryDone && quizDone) {
+      document.getElementById('final-love-note-section').style.display = 'block';
+      document.getElementById('final-love-note').innerHTML = myLongLoveNote;
+      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+    }
+  }
 </script>
 </body>
 </html>
