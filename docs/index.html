@@ -8,10 +8,15 @@
   <style>
     /* Cartoony pastel theme */
 body {
-    background: linear-gradient(135deg, #ffe4ec 0%, #c9e7ff 100%);
-    font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
-    margin: 0;
-    padding: 0;
+  position: relative;
+  overflow-x: hidden;
+  /* Remove or comment out the next three lines: */
+  /* background: url("data:image/svg+xml;utf8,<svg width='40' height='40' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'><path d='M16 29s-11-8.5-11-16A7 7 0 0 1 16 6a7 7 0 0 1 11 7c0 7.5-11 16-11 16z' fill='%23ffb6c1' stroke='%23b4a7ff' stroke-width='2'/></svg>");
+  background-repeat: repeat;
+  background-size: 64px 64px; */
+  font-family: 'Comic Sans MS', 'Comic Sans', sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 header {
@@ -63,6 +68,8 @@ main {
     max-width: 600px;
     padding: 30px 30px 20px 30px;
     box-shadow: 0 8px 32px #b4a7ff33;
+    border: 4px solid #b4a7ff; /* Add this line for a pastel blue border */
+    position: relative;
 }
 
 #love-interaction {
@@ -176,22 +183,67 @@ footer {
   cursor: default;
 }
 
-#quiz-options button {
-  background: #ffb6c1;
+/* Quiz and Love Note Buttons */
+#quiz-options button,
+#quiz-sofia-options button,
+#memory-message button,
+#pick-another {
+  background: linear-gradient(135deg, #ffb6c1 60%, #b4a7ff 100%);
   border: 2px solid #b4a7ff;
-  border-radius: 12px;
+  border-radius: 18px;
   color: #7b6cff;
-  font-size: 1em;
+  font-size: 1.1em;
   margin: 8px;
-  padding: 10px 20px;
+  padding: 12px 28px;
   font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
   cursor: pointer;
-  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 4px 12px #b4a7ff33;
+  transition: background 0.2s, color 0.2s, transform 0.1s, border-color 0.2s;
 }
-#quiz-options button:hover {
-  background: #b4a7ff;
+
+#quiz-options button:hover,
+#quiz-sofia-options button:hover,
+#memory-message button:hover,
+#pick-another:hover {
+  background: linear-gradient(135deg, #b4a7ff 60%, #ffb6c1 100%);
   color: #fff;
-  transform: scale(1.05);
+  border-color: #ff69b4;
+  transform: scale(1.07) rotate(-2deg);
+}
+
+#love-btn,
+#save-message-btn,
+#quiz-options button,
+#quiz-sofia-options button,
+#memory-message button,
+#pick-another,
+#save-doodle-btn,
+#clear-doodle-btn {
+  background: #ffb6c1; /* Pastel pink */
+  border: 2px solid #b4a7ff;
+  border-radius: 18px;
+  color: #7b6cff;
+  font-size: 1.1em;
+  margin: 8px;
+  padding: 12px 28px;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+  cursor: pointer;
+  box-shadow: 0 4px 12px #b4a7ff33;
+  transition: background 0.2s, color 0.2s, transform 0.1s, border-color 0.2s;
+}
+
+#love-btn:hover,
+#save-message-btn:hover,
+#quiz-options button:hover,
+#quiz-sofia-options button:hover,
+#memory-message button:hover,
+#pick-another:hover,
+#save-doodle-btn:hover,
+#clear-doodle-btn:hover {
+  background: #b4a7ff; /* Pastel blue on hover */
+  color: #fff;
+  border-color: #ff69b4;
+  transform: scale(1.07) rotate(-2deg);
 }
 
 /* Responsive adjustments for mobile */
@@ -234,11 +286,56 @@ footer {
     margin: 6px 0;
   }
 }
+
+#final-love-note-section {
+  display: none;
+  text-align: center;
+  margin: 40px auto 20px auto;
+}
+
+#final-love-note {
+  max-width: 90vw;
+  width: 100%;
+  margin: 0 auto;
+  background: #fffbe7;
+  border-radius: 20px;
+  padding: 32px 24px;
+  color: #7b6cff;
+  font-size: 1.15em;
+  box-shadow: 0 4px 24px #b4a7ff22;
+  line-height: 1.7;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: url("data:image/svg+xml;utf8,<svg width='40' height='40' viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'><path d='M16 29s-11-8.5-11-16A7 7 0 0 1 16 6a7 7 0 0 1 11 7c0 7.5-11 16-11 16z' fill='%23ffb6c1' stroke='%23b4a7ff' stroke-width='2'/></svg>");
+  background-repeat: repeat;
+  background-size: 64px 64px;
+  animation: hearts-move 20s linear infinite;
+}
+
+@keyframes hearts-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 128px 128px;
+  }
+}
+
+header, main, footer, #final-love-note-section, #fail-video {
+  position: relative;
+  z-index: 8;
+}
   </style>
 </head>
 <body>
   <header>
-  <h1>I love you sexy</h1>
+  <h1>Happy Third Anniversary!</h1>
   <p>Get ready to blow your mind...</p>
   <div class="timer-container">
     <h2 id="countdown">30</h2>
@@ -276,33 +373,69 @@ footer {
   <div id="quiz-result"></div>
 </section>
 
+<!-- Quiz About Sofia Section -->
+<section id="quiz-sofia-section">
+  <h2>Quiz: How Well Do I Know Sofia?</h2>
+  <div id="quiz-sofia-question"></div>
+  <div id="quiz-sofia-options"></div>
+  <div id="quiz-sofia-result"></div>
+</section>
+
 <!-- Final Love Note Section -->
 <section id="final-love-note-section" style="display:none; text-align:center;">
   <h2>My Love Letter to You</h2>
   <div id="final-love-note" style="max-width: 500px; margin: 0 auto; background: #fffbe7; border-radius: 16px; padding: 24px 20px; color: #7b6cff; font-size: 1.1em; box-shadow: 0 2px 8px #b4a7ff22;"></div>
 </section>
+
+<!-- Add this just above your <footer> -->
+<section id="sofia-message-section" style="text-align:center; margin:40px auto 30px auto;">
+  <h2>Leave a message for Loraine!</h2>
+  <textarea id="sofia-message" rows="5" style="width:90%; max-width:500px; border-radius:16px; border:2px solid #b4a7ff; padding:16px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif; background:#fffbe7; color:#7b6cff; box-shadow:0 2px 8px #b4a7ff22;"></textarea>
+  <br>
+  <button id="save-message-btn" style="margin-top:16px; background:linear-gradient(135deg,#ffb6c1 60%,#b4a7ff 100%); color:#7b6cff; border:2px solid #b4a7ff; border-radius:18px; padding:12px 28px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif; cursor:pointer; box-shadow:0 4px 12px #b4a7ff33; transition:background 0.2s, color 0.2s, transform 0.1s, border-color 0.2s;">Save Message 💌</button>
+  <div id="sofia-message-display" style="margin-top:24px; color:#ff69b4; font-size:1.15em;"></div>
+</section>
+
+<!-- Add this above your <footer> -->
+<section id="drawing-section" style="text-align:center; margin:40px auto 30px auto;">
+  <h2>Draw a doodle for Loraine!</h2>
+  <canvas id="drawing-canvas" width="350" height="250" style="background:#fffbe7; border:2px solid #b4a7ff; border-radius:18px; box-shadow:0 2px 8px #b4a7ff22; cursor:crosshair;"></canvas>
+  <br>
+  <button id="save-doodle-btn" style="margin:12px 8px; background:linear-gradient(135deg,#ffb6c1 60%,#b4a7ff 100%); color:#7b6cff; border:2px solid #b4a7ff; border-radius:18px; padding:10px 24px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif; cursor:pointer;">Save Doodle</button>
+  <button id="clear-doodle-btn" style="margin:12px 8px; background:linear-gradient(135deg,#b4a7ff 60%,#ffb6c1 100%); color:#fff; border:2px solid #ffb6c1; border-radius:18px; padding:10px 24px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif; cursor:pointer;">Clear</button>
+  <div id="doodle-saved-msg" style="margin-top:12px; color:#ff69b4; font-size:1.1em;"></div>
+</section>
+
   <footer>
     <p>© Loraine & Sofia 2025</p>
   </footer> 
 <script>
   // --- Love Notes Array ---
   const loveNotes = [
-    "Thank you for spending another month with me 💖",
-    "I’m so grateful for how patient you are with me, and how much you try to  to ! 🌸",
-    "You are my favorite person in the whole world! 🥰",
+    "Baby, thank you for trying again with me, its been 8 months and I'm still so happy to be back with you. ",
+    "I’m so grateful for how patient you are with me, and how much you try to work things out no matter what, baby, I'll always keep trying for you",
+    "You are my favorite person in the whole world, I hope I am too.",
     "December 25, Daddy robb! may pinapakta sya sakin!! mag brip ka na! ✨",
     "You're my number one sigma ⭐",
-    "Thank you for letting me be your sigma! 🥜🍓"
+    "Thank you for letting me be your sigma!"
   ];
 
   const myLongLoveNote = `
-    Dear Sofia, <br><br>
-    You and I are reaching our third anniversarry, three years together. That's a long time. <br>
+    To my Dearest Sofia, <br><br>
+    Happy Anniversary, our third one together. two months ago, you and I officially have been a year apart. <br>
+    a month in those 3 years spent with me farther away from you than I usually already am. <br>
+    That's a month I'll never get back, and a month I'll spend the rest of my life regretting giving away, and a month I'll spend the rest of my life trying to make up for. <br>
     Thank you for sticking with me for this long, for your undying patience, your love, and your understanding. <br>
     Baby, you complete me, I hope I give you the same contentment as you give me. <br>
-    I hope to spend the next coming years with you, and that this website was an adequate showcase of my love for you. <br>  
+    There are a lot of things I'm not sure of right now. For one, when I'll come home, or when I'll feel truly at home here, <br>
+    or if it'll still be you I come home to when I do come back, or if we'll make it through this distance. <br>
+    I keep pushing forward because I want us to work, even if I'm not sure about a lot of things. Some I won't care to mention, <br>
+    Some, I'll probably never confess I worried or thought about. <br>
+    I don't doubt we'll have our challenges, and many more things we won't see the same. I don't doubt either that I'll stop having thoughts like these. <br>
+    I hope to spend the next coming years with you, and that this website was an adequate showcase of my love for you. <br>
+    I can only hope you'll be there to understand and support me through it all. <br>
     <br><br>
-    I love you more than words can say. Thank you for being my girlfriend. 
+    I love you more than words can say, or maybe at some point, I'll find the right words. Thank you for being my girlfriend.
   `;
 
   let loveCount = 0;
@@ -510,9 +643,9 @@ footer {
         btn.onclick = () => {
           if (option === q.answer) {
             quizScore++;
-            document.getElementById('quiz-result').textContent = "Correct! 🎉";
+            document.getElementById('quiz-result').textContent = "Correct!! Meow";
           } else {
-            document.getElementById('quiz-result').textContent = "Oops! Try the next one!";
+            document.getElementById('quiz-result').textContent = "Bro, why are you getting these wrong?";
           }
           quizIndex++;
           setTimeout(() => {
@@ -524,16 +657,262 @@ footer {
       });
     }
 
+    // --- Quiz About Sofia ---
+    const quizSofiaQuestions = [
+      {
+        question: "What is Sofia's current favorite hobby?",
+        options: ["Reading", "Clay-Making", "Painting", "Cooking"],
+        answer: "Clay-Making"
+      },
+      {
+        question: "What is Sofia's dream travel destination?",
+        options: ["Japan", "France", "Sweden", "Netherlands"],
+        answer: "Netherlands"
+      },
+      {
+        question: "Which food does Sofia dislike?",
+        options: ["Adobo", "Dinuguan", "Ice Cream", "Sinigang"],
+        answer: "Dinuguan"
+      }
+    ];
+    let quizSofiaIndex = 0, quizSofiaScore = 0;
+    let quizSofiaDone = false;
+
+    function showQuizSofiaQuestion() {
+      if (!document.getElementById('quiz-sofia-question')) return;
+      if (quizSofiaIndex >= quizSofiaQuestions.length) {
+        document.getElementById('quiz-sofia-question').textContent = "Quiz Complete!";
+        document.getElementById('quiz-sofia-options').innerHTML = "";
+        document.getElementById('quiz-sofia-result').textContent = `You got ${quizSofiaScore} out of ${quizSofiaQuestions.length} correct!`;
+        quizSofiaDone = true;
+        checkAllTasksDone();
+        return;
+      }
+      const q = quizSofiaQuestions[quizSofiaIndex];
+      document.getElementById('quiz-sofia-question').textContent = q.question;
+      document.getElementById('quiz-sofia-options').innerHTML = '';
+      q.options.forEach(option => {
+        const btn = document.createElement('button');
+        btn.textContent = option;
+        btn.onclick = () => {
+          if (option === q.answer) {
+            quizSofiaScore++;
+            document.getElementById('quiz-sofia-result').textContent = "Correct! 🎉";
+          } else {
+            document.getElementById('quiz-sofia-result').textContent = "Jeez, how many girlfriends do you have? Try the next one!";
+          }
+          quizSofiaIndex++;
+          setTimeout(() => {
+            document.getElementById('quiz-sofia-result').textContent = "";
+            showQuizSofiaQuestion();
+          }, 1000);
+        };
+        document.getElementById('quiz-sofia-options').appendChild(btn);
+      });
+    }
+
     showQuizQuestion();
+    showQuizSofiaQuestion();
+
+    // Initialize Firebase (v8 syntax)
+    const firebaseConfig = {
+      apiKey: "AIzaSyC8COXVKQHJZUGJe19C-UO6jKen_nasEBo",
+      authDomain: "sofia-de03b.firebaseapp.com",
+      databaseURL: "https://sofia-de03b-default-rtdb.asia-southeast1.firebasedatabase.app", // <-- Add this line!
+      projectId: "sofia-de03b",
+      storageBucket: "sofia-de03b.appspot.com",
+      messagingSenderId: "1011948138101",
+      appId: "1:1011948138101:web:1045bbb46c19fe4a57923c",
+      measurementId: "G-ZF463CN6M6"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // --- Sofia's Message (sync with Firebase) ---
+    document.getElementById('save-message-btn').onclick = function() {
+      const msg = document.getElementById('sofia-message').value.trim();
+      if(msg) {
+        db.ref('sofiaMessage').set(msg);
+        document.getElementById('sofia-message').value = '';
+      }
+    };
+
+    db.ref('sofiaMessage').on('value', (snapshot) => {
+      const savedMsg = snapshot.val();
+      if(savedMsg) {
+        document.getElementById('sofia-message-display').innerHTML =
+          `<b>Sofia's message for you:</b><br><span style="background:#fffbe7; border-radius:12px; padding:12px 18px; display:inline-block; margin-top:8px;">${savedMsg.replace(/\n/g, "<br>")}</span>`;
+      } else {
+        document.getElementById('sofia-message-display').innerHTML = '';
+      }
+    });
+
+    // --- Drawing Doodle (sync with Firebase) ---
+    const canvas = document.getElementById('drawing-canvas');
+    const ctx = canvas.getContext('2d');
+    let drawing = false;
+    let lastX = 0, lastY = 0;
+
+    canvas.addEventListener('mousedown', (e) => {
+      drawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+    canvas.addEventListener('mouseup', () => drawing = false);
+    canvas.addEventListener('mouseout', () => drawing = false);
+    canvas.addEventListener('mousemove', draw);
+
+    function draw(e) {
+      if (!drawing) return;
+      ctx.strokeStyle = '#b4a7ff';
+      ctx.lineWidth = 3;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(e.offsetX, e.offsetY);
+      ctx.stroke();
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    }
+
+    // Save doodle to Firebase
+    document.getElementById('save-doodle-btn').onclick = function() {
+      const dataURL = canvas.toDataURL();
+      db.ref('sofiaDoodle').set(dataURL);
+      document.getElementById('doodle-saved-msg').textContent = "Doodle saved and synced! 💖";
+    };
+
+    // Clear canvas and remove doodle from Firebase
+    document.getElementById('clear-doodle-btn').onclick = function() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      document.getElementById('doodle-saved-msg').textContent = "";
+      db.ref('sofiaDoodle').remove();
+    };
+
+    // Load saved doodle from Firebase on page load and on update
+    db.ref('sofiaDoodle').on('value', (snapshot) => {
+      const saved = snapshot.val();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      if (saved) {
+        const img = new window.Image();
+        img.onload = function() {
+          ctx.drawImage(img, 0, 0);
+        };
+        img.src = saved;
+        document.getElementById('doodle-saved-msg').textContent = "Your saved doodle is loaded!";
+      } else {
+        document.getElementById('doodle-saved-msg').textContent = "";
+      }
+    });
+
   });
 
   function checkAllTasksDone() {
-    if (loveInputDone && memoryDone && quizDone) {
+    if (loveInputDone && memoryDone && quizDone && quizSofiaDone) {
       document.getElementById('final-love-note-section').style.display = 'block';
       document.getElementById('final-love-note').innerHTML = myLongLoveNote;
       window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
     }
   }
+  // Import the functions you need from the SDKs you need
+   // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
+
+  // Your web app's Firebase configuration
+  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+  const firebaseConfig = {
+    apiKey: "AIzaSyC8COXVKQHJZUGJe19C-UO6jKen_nasEBo",
+    authDomain: "sofia-de03b.firebaseapp.com",
+    projectId: "sofia-de03b",
+    storageBucket: "sofia-de03b.firebasestorage.app",
+    messagingSenderId: "1011948138101",
+    appId: "1:1011948138101:web:1045bbb46c19fe4a57923c",
+    measurementId: "G-ZF463CN6M6"
+  };
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
+</script>
+<!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<!-- Firebase Realtime Database -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+<script>
+
+
+  // --- Sofia's Message (sync with Firebase) ---
+  document.getElementById('save-message-btn').onclick = function() {
+    const msg = document.getElementById('sofia-message').value.trim();
+    if(msg) {
+      db.ref('sofiaMessage').set(msg);
+      document.getElementById('sofia-message').value = '';
+    }
+  };
+
+  db.ref('sofiaMessage').on('value', (snapshot) => {
+    const savedMsg = snapshot.val();
+    if(savedMsg) {
+      document.getElementById('sofia-message-display').innerHTML =
+        `<b>Sofia's message for you:</b><br><span style="background:#fffbe7; border-radius:12px; padding:12px 18px; display:inline-block; margin-top:8px;">${savedMsg.replace(/\n/g, "<br>")}</span>`;
+    } else {
+      document.getElementById('sofia-message-display').innerHTML = '';
+    }
+  });
+
+  // --- Drawing Doodle (sync with Firebase) ---
+  const canvas = document.getElementById('drawing-canvas');
+  const ctx = canvas.getContext('2d');
+  let drawing = false;
+  let lastX = 0, lastY = 0;
+
+  canvas.addEventListener('mousedown', (e) => {
+    drawing = true;
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+  });
+  canvas.addEventListener('mouseup', () => drawing = false);
+  canvas.addEventListener('mouseout', () => drawing = false);
+  canvas.addEventListener('mousemove', draw);
+
+  function draw(e) {
+    if (!drawing) return;
+    ctx.strokeStyle = '#b4a7ff';
+    ctx.lineWidth = 3;
+    ctx.lineCap = 'round';
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(e.offsetX, e.offsetY);
+    ctx.stroke();
+    [lastX, lastY] = [e.offsetX, e.offsetY];
+  }
+
+  // Save doodle to Firebase
+  document.getElementById('save-doodle-btn').onclick = function() {
+    const dataURL = canvas.toDataURL();
+    db.ref('sofiaDoodle').set(dataURL);
+    document.getElementById('doodle-saved-msg').textContent = "Doodle saved, thank you!";
+  };
+
+  // Clear canvas and remove doodle from Firebase
+  document.getElementById('clear-doodle-btn').onclick = function() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    document.getElementById('doodle-saved-msg').textContent = "";
+    db.ref('sofiaDoodle').remove();
+  };
+
+  // Load saved doodle from Firebase on page load and on update
+  db.ref('sofiaDoodle').on('value', (snapshot) => {
+    const saved = snapshot.val();
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (saved) {
+      const img = new window.Image();
+      img.onload = function() {
+        ctx.drawImage(img, 0, 0);
+      };
+      img.src = saved;
+      document.getElementById('doodle-saved-msg').textContent = "Your saved doodle is loaded!";
+    } else {
+      document.getElementById('doodle-saved-msg').textContent = "";
+    }
+  });
 </script>
 </body>
 </html>
