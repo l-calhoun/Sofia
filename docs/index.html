@@ -85,7 +85,7 @@ main {
     border-radius: 20px;
     padding: 12px 20px;
     font-size: 1.2em;
-    font-family: 'Comic Sans MS', 'Comic Sans', sans-serif;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
     background: #fffbe7;
     box-shadow: 0 4px 12px #ffb6c1;
     outline: none;
@@ -104,7 +104,7 @@ main {
     border-radius: 20px;
     padding: 12px 24px;
     font-size: 1.1em;
-    font-family: 'Comic Sans MS', 'Comic Sans', sans-serif;
+    font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
     cursor: pointer;
     box-shadow: 0 4px 12px #b4a7ff66;
     transition: background 0.2s, transform 0.1s, border-color 0.2s;
@@ -195,7 +195,7 @@ footer {
   font-size: 1.1em;
   margin: 8px;
   padding: 12px 28px;
-  font-family: 'Comic Sans MS', 'Comic Sans', sans-serif;
+  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
   cursor: pointer;
   box-shadow: 0 4px 12px #b4a7ff33;
   transition: background 0.2s, color 0.2s, transform 0.1s, border-color 0.2s;
@@ -390,9 +390,9 @@ header, main, footer, #final-love-note-section, #fail-video {
 <!-- Add this just above your <footer> -->
 <section id="sofia-message-section" style="text-align:center; margin:40px auto 30px auto;">
   <h2>Leave a message for Loraine!</h2>
-  <textarea id="sofia-message" rows="5" style="width:90%; max-width:500px; border-radius:16px; border:2px solid #b4a7ff; padding:16px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', sans-serif; background:#fffbe7; color:#7b6cff; box-shadow:0 2px 8px #b4a7ff22;"></textarea>
+  <textarea id="sofia-message" rows="5" style="width:90%; max-width:500px; border-radius:16px; border:2px solid #b4a7ff; padding:16px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif; background:#fffbe7; color:#7b6cff; box-shadow:0 2px 8px #b4a7ff22;"></textarea>
   <br>
-  <button id="save-message-btn" style="margin-top:16px; background:linear-gradient(135deg,#ffb6c1 60%,#b4a7ff 100%); color:#7b6cff; border:2px solid #b4a7ff; border-radius:18px; padding:12px 28px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', sans-serif; cursor:pointer; box-shadow:0 4px 12px #b4a7ff33; transition:background 0.2s, color 0.2s, transform 0.1s, border-color 0.2s;">Save Message 💌</button>
+  <button id="save-message-btn" style="margin-top:16px; background:linear-gradient(135deg,#ffb6c1 60%,#b4a7ff 100%); color:#7b6cff; border:2px solid #b4a7ff; border-radius:18px; padding:12px 28px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif; cursor:pointer; box-shadow:0 4px 12px #b4a7ff33; transition:background 0.2s, color 0.2s, transform 0.1s, border-color 0.2s;">Save Message 💌</button>
   <div id="sofia-message-display" style="margin-top:24px; color:#ff69b4; font-size:1.15em;"></div>
 </section>
 
@@ -401,8 +401,8 @@ header, main, footer, #final-love-note-section, #fail-video {
   <h2>Draw a doodle for Loraine!</h2>
   <canvas id="drawing-canvas" width="350" height="250" style="background:#fffbe7; border:2px solid #b4a7ff; border-radius:18px; box-shadow:0 2px 8px #b4a7ff22; cursor:crosshair;"></canvas>
   <br>
-  <button id="save-doodle-btn" style="margin:12px 8px; background:linear-gradient(135deg,#ffb6c1 60%,#b4a7ff 100%); color:#7b6cff; border:2px solid #b4a7ff; border-radius:18px; padding:10px 24px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', sans-serif; cursor:pointer;">Save Doodle</button>
-  <button id="clear-doodle-btn" style="margin:12px 8px; background:linear-gradient(135deg,#b4a7ff 60%,#ffb6c1 100%); color:#fff; border:2px solid #ffb6c1; border-radius:18px; padding:10px 24px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', sans-serif; cursor:pointer;">Clear</button>
+  <button id="save-doodle-btn" style="margin:12px 8px; background:linear-gradient(135deg,#ffb6c1 60%,#b4a7ff 100%); color:#7b6cff; border:2px solid #b4a7ff; border-radius:18px; padding:10px 24px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif; cursor:pointer;">Save Doodle</button>
+  <button id="clear-doodle-btn" style="margin:12px 8px; background:linear-gradient(135deg,#b4a7ff 60%,#ffb6c1 100%); color:#fff; border:2px solid #ffb6c1; border-radius:18px; padding:10px 24px; font-size:1.1em; font-family:'Comic Sans MS', 'Comic Sans', cursive, sans-serif; cursor:pointer;">Clear</button>
   <div id="doodle-saved-msg" style="margin-top:12px; color:#ff69b4; font-size:1.1em;"></div>
 </section>
 
@@ -430,116 +430,37 @@ header, main, footer, #final-love-note-section, #fail-video {
   }
   const db = firebase.database();
 
-  document.addEventListener('DOMContentLoaded', () => {
-    // --- Sofia's Message Sync (Firebase) ---
-    db.ref('sofiaMessage').on('value', (snapshot) => {
-      const savedMsg = snapshot.val();
-      if(savedMsg && document.getElementById('sofia-message-display')) {
-        document.getElementById('sofia-message-display').innerHTML =
-          `<b>Sofia's message for you:</b><br><span style="background:#fffbe7; border-radius:12px; padding:12px 18px; display:inline-block; margin-top:8px;">${savedMsg.replace(/\n/g, "<br>")}</span>`;
-      } else if(document.getElementById('sofia-message-display')) {
-        document.getElementById('sofia-message-display').innerHTML = '';
-      }
-    });
-
-    document.getElementById('save-message-btn').onclick = function() {
-      const msg = document.getElementById('sofia-message').value.trim();
-      if(msg) {
-        db.ref('sofiaMessage').set(msg);
-        document.getElementById('sofia-message').value = '';
-      }
-    };
-
-    // --- Drawing Doodle Setup (with Touch Support) ---
-    window.doodleCanvas = document.getElementById('drawing-canvas');
-    window.doodleCtx = doodleCanvas.getContext('2d');
-    let drawing = false;
-    let lastX = 0, lastY = 0;
-
-    // Mouse events
-    doodleCanvas.addEventListener('mousedown', (e) => {
-      drawing = true;
-      [lastX, lastY] = [e.offsetX, e.offsetY];
-    });
-    doodleCanvas.addEventListener('mouseup', () => drawing = false);
-    doodleCanvas.addEventListener('mouseout', () => drawing = false);
-    doodleCanvas.addEventListener('mousemove', draw);
-
-    // Touch events for mobile
-    doodleCanvas.addEventListener('touchstart', function(e) {
-      e.preventDefault();
-      drawing = true;
-      const rect = doodleCanvas.getBoundingClientRect();
-      const touch = e.touches[0];
-      lastX = touch.clientX - rect.left;
-      lastY = touch.clientY - rect.top;
-    }, {passive: false});
-    doodleCanvas.addEventListener('touchend', function(e) {
-      drawing = false;
-    }, {passive: false});
-    doodleCanvas.addEventListener('touchcancel', function(e) {
-      drawing = false;
-    }, {passive: false});
-    doodleCanvas.addEventListener('touchmove', function(e) {
-      if (!drawing) return;
-      e.preventDefault();
-      const rect = doodleCanvas.getBoundingClientRect();
-      const touch = e.touches[0];
-      const x = touch.clientX - rect.left;
-      const y = touch.clientY - rect.top;
-      doodleCtx.strokeStyle = '#b4a7ff';
-      doodleCtx.lineWidth = 3;
-      doodleCtx.lineCap = 'round';
-      doodleCtx.beginPath();
-      doodleCtx.moveTo(lastX, lastY);
-      doodleCtx.lineTo(x, y);
-      doodleCtx.stroke();
-      lastX = x;
-      lastY = y;
-    }, {passive: false});
-
-    function draw(e) {
-      if (!drawing) return;
-      doodleCtx.strokeStyle = '#b4a7ff';
-      doodleCtx.lineWidth = 3;
-      doodleCtx.lineCap = 'round';
-      doodleCtx.beginPath();
-      doodleCtx.moveTo(lastX, lastY);
-      doodleCtx.lineTo(e.offsetX, e.offsetY);
-      doodleCtx.stroke();
-      [lastX, lastY] = [e.offsetX, e.offsetY];
+  // --- Sofia's Message (sync with Firebase) ---
+  db.ref('sofiaMessage').on('value', (snapshot) => {
+    const savedMsg = snapshot.val();
+    if(savedMsg && document.getElementById('sofia-message-display')) {
+      document.getElementById('sofia-message-display').innerHTML =
+        `<b>Sofia's message for you:</b><br><span style="background:#fffbe7; border-radius:12px; padding:12px 18px; display:inline-block; margin-top:8px;">${savedMsg.replace(/\n/g, "<br>")}</span>`;
+    } else if(document.getElementById('sofia-message-display')) {
+      document.getElementById('sofia-message-display').innerHTML = '';
     }
+  });
 
-    document.getElementById('save-doodle-btn').onclick = function() {
-      const dataURL = doodleCanvas.toDataURL();
-      db.ref('sofiaDoodle').set(dataURL)
-        .then(() => console.log("Doodle saved to Firebase!"))
-        .catch(err => console.error("Error saving doodle:", err));
-      document.getElementById('doodle-saved-msg').textContent = "Doodle saved and synced! 💖";
-    };
-
-    document.getElementById('clear-doodle-btn').onclick = function() {
-      doodleCtx.clearRect(0, 0, doodleCanvas.width, doodleCanvas.height);
-      document.getElementById('doodle-saved-msg').textContent = "";
-      db.ref('sofiaDoodle').remove();
-    };
-
-    // --- Drawing Doodle Sync (Firebase) ---
-    db.ref('sofiaDoodle').on('value', (snapshot) => {
-      const saved = snapshot.val();
-      doodleCtx.clearRect(0, 0, doodleCanvas.width, doodleCanvas.height);
+  // --- Drawing Doodle (sync with Firebase) ---
+  db.ref('sofiaDoodle').on('value', (snapshot) => {
+    const saved = snapshot.val();
+    if (window.doodleCtx && window.doodleCanvas) {
+      window.doodleCtx.clearRect(0, 0, window.doodleCanvas.width, window.doodleCanvas.height);
       if (saved) {
         const img = new window.Image();
         img.onload = function() {
-          doodleCtx.drawImage(img, 0, 0);
+          window.doodleCtx.drawImage(img, 0, 0);
         };
         img.src = saved;
         if(document.getElementById('doodle-saved-msg')) document.getElementById('doodle-saved-msg').textContent = "Your saved doodle is loaded!";
       } else {
         if(document.getElementById('doodle-saved-msg')) document.getElementById('doodle-saved-msg').textContent = "";
       }
-    });
-
+    }
+  });
+</script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
     // --- Timer ---
     const countdownElement = document.getElementById('countdown');
     let timeLeft = 30;
@@ -807,6 +728,55 @@ header, main, footer, #final-love-note-section, #fail-video {
 
     showQuizQuestion();
     showQuizSofiaQuestion();
+
+    // --- Sofia's Message Save ---
+    document.getElementById('save-message-btn').onclick = function() {
+      const msg = document.getElementById('sofia-message').value.trim();
+      if(msg) {
+        db.ref('sofiaMessage').set(msg);
+        document.getElementById('sofia-message').value = '';
+      }
+    };
+
+    // --- Drawing Doodle Setup ---
+    window.doodleCanvas = document.getElementById('drawing-canvas');
+    window.doodleCtx = doodleCanvas.getContext('2d');
+    let drawing = false;
+    let lastX = 0, lastY = 0;
+
+    doodleCanvas.addEventListener('mousedown', (e) => {
+      drawing = true;
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    });
+    doodleCanvas.addEventListener('mouseup', () => drawing = false);
+    doodleCanvas.addEventListener('mouseout', () => drawing = false);
+    doodleCanvas.addEventListener('mousemove', draw);
+
+    function draw(e) {
+      if (!drawing) return;
+      doodleCtx.strokeStyle = '#b4a7ff';
+      doodleCtx.lineWidth = 3;
+      doodleCtx.lineCap = 'round';
+      doodleCtx.beginPath();
+      doodleCtx.moveTo(lastX, lastY);
+      doodleCtx.lineTo(e.offsetX, e.offsetY);
+      doodleCtx.stroke();
+      [lastX, lastY] = [e.offsetX, e.offsetY];
+    }
+
+    document.getElementById('save-doodle-btn').onclick = function() {
+      const dataURL = doodleCanvas.toDataURL();
+      db.ref('sofiaDoodle').set(dataURL)
+        .then(() => console.log("Doodle saved to Firebase!"))
+        .catch(err => console.error("Error saving doodle:", err));
+      document.getElementById('doodle-saved-msg').textContent = "Doodle saved and synced! 💖";
+    };
+
+    document.getElementById('clear-doodle-btn').onclick = function() {
+      doodleCtx.clearRect(0, 0, doodleCanvas.width, doodleCanvas.height);
+      document.getElementById('doodle-saved-msg').textContent = "";
+      db.ref('sofiaDoodle').remove();
+    };
   });
 </script>
 </body>
