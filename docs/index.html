@@ -226,7 +226,7 @@ footer {
   font-size: 1.1em;
   margin: 8px;
   padding: 12px 28px;
-  font-family: 'Comic Sans MS', 'Comic Sans', cursive, sans-serif;
+  font-family: 'Comic Sans MS', 'Comic Sans', sans-serif;
   cursor: pointer;
   box-shadow: 0 4px 12px #b4a7ff33;
   transition: background 0.2s, color 0.2s, transform 0.1s, border-color 0.2s;
@@ -336,7 +336,7 @@ header, main, footer, #final-love-note-section, #fail-video {
 <body>
   <header>
   <h1>Happy Third Anniversary!</h1>
-  <p>Get ready to blow your mind...</p>
+  <p>My heart laid out in code for you.</p>
   <div class="timer-container">
     <h2 id="countdown">30</h2>
   </div>
@@ -409,6 +409,11 @@ header, main, footer, #final-love-note-section, #fail-video {
   <footer>
     <p>© Loraine & Sofia 2025</p>
   </footer> 
+
+<!-- Firebase App (the core Firebase SDK) -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+<!-- Firebase Realtime Database -->
+<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script>
   // --- Love Notes Array ---
   const loveNotes = [
@@ -432,8 +437,11 @@ header, main, footer, #final-love-note-section, #fail-video {
     I keep pushing forward because I want us to work, even if I'm not sure about a lot of things. Some I won't care to mention, <br>
     Some, I'll probably never confess I worried or thought about. <br>
     I don't doubt we'll have our challenges, and many more things we won't see the same. I don't doubt either that I'll stop having thoughts like these. <br>
+    I hope we get through all the challenges we'll face, I hope you and I still get to grow together even when we're miles away. <br>
+    I can only pray I can be the partner you deserve, and that I can support you as you have supported me. <br>
+   <br><br>
     I hope to spend the next coming years with you, and that this website was an adequate showcase of my love for you. <br>
-    I can only hope you'll be there to understand and support me through it all. <br>
+    I hope you'll be the one to be there to understand and support me through it all. <br>
     <br><br>
     I love you more than words can say, or maybe at some point, I'll find the right words. Thank you for being my girlfriend.
   `;
@@ -443,6 +451,7 @@ header, main, footer, #final-love-note-section, #fail-video {
   let loveInputDone = false;
   let memoryDone = false;
   let quizDone = false;
+  let quizSofiaDone = false;
 
   document.addEventListener('DOMContentLoaded', () => {
     // --- Timer ---
@@ -676,7 +685,6 @@ header, main, footer, #final-love-note-section, #fail-video {
       }
     ];
     let quizSofiaIndex = 0, quizSofiaScore = 0;
-    let quizSofiaDone = false;
 
     function showQuizSofiaQuestion() {
       if (!document.getElementById('quiz-sofia-question')) return;
@@ -714,18 +722,20 @@ header, main, footer, #final-love-note-section, #fail-video {
     showQuizQuestion();
     showQuizSofiaQuestion();
 
-    // Initialize Firebase (v8 syntax)
+    // --- Firebase (v8 syntax) ---
     const firebaseConfig = {
       apiKey: "AIzaSyC8COXVKQHJZUGJe19C-UO6jKen_nasEBo",
       authDomain: "sofia-de03b.firebaseapp.com",
-      databaseURL: "https://sofia-de03b-default-rtdb.asia-southeast1.firebasedatabase.app", // <-- Add this line!
+      databaseURL: "https://sofia-de03b-default-rtdb.asia-southeast1.firebasedatabase.app",
       projectId: "sofia-de03b",
       storageBucket: "sofia-de03b.appspot.com",
       messagingSenderId: "1011948138101",
       appId: "1:1011948138101:web:1045bbb46c19fe4a57923c",
       measurementId: "G-ZF463CN6M6"
     };
-    firebase.initializeApp(firebaseConfig);
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
     const db = firebase.database();
 
     // --- Sofia's Message (sync with Firebase) ---
@@ -803,116 +813,16 @@ header, main, footer, #final-love-note-section, #fail-video {
       }
     });
 
-  });
+  }); // end DOMContentLoaded
 
   function checkAllTasksDone() {
-    if (loveInputDone && memoryDone && quizDone && quizSofiaDone) {
-      document.getElementById('final-love-note-section').style.display = 'block';
-      document.getElementById('final-love-note').innerHTML = myLongLoveNote;
-      window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
-    }
+  console.log('loveInputDone:', loveInputDone, 'memoryDone:', memoryDone, 'quizDone:', quizDone, 'quizSofiaDone:', quizSofiaDone);
+  if (loveInputDone && memoryDone && quizDone && quizSofiaDone) {
+    document.getElementById('final-love-note-section').style.display = 'block';
+    document.getElementById('final-love-note').innerHTML = myLongLoveNote;
+    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
   }
-  // Import the functions you need from the SDKs you need
-   // TODO: Add SDKs for Firebase products that you want to use
-  // https://firebase.google.com/docs/web/setup#available-libraries
-
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-    apiKey: "AIzaSyC8COXVKQHJZUGJe19C-UO6jKen_nasEBo",
-    authDomain: "sofia-de03b.firebaseapp.com",
-    projectId: "sofia-de03b",
-    storageBucket: "sofia-de03b.firebasestorage.app",
-    messagingSenderId: "1011948138101",
-    appId: "1:1011948138101:web:1045bbb46c19fe4a57923c",
-    measurementId: "G-ZF463CN6M6"
-  };
-
-  // Initialize Firebase
-  const app = initializeApp(firebaseConfig);
-  const analytics = getAnalytics(app);
-</script>
-<!-- Firebase App (the core Firebase SDK) -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
-<!-- Firebase Realtime Database -->
-<script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
-<script>
-
-
-  // --- Sofia's Message (sync with Firebase) ---
-  document.getElementById('save-message-btn').onclick = function() {
-    const msg = document.getElementById('sofia-message').value.trim();
-    if(msg) {
-      db.ref('sofiaMessage').set(msg);
-      document.getElementById('sofia-message').value = '';
-    }
-  };
-
-  db.ref('sofiaMessage').on('value', (snapshot) => {
-    const savedMsg = snapshot.val();
-    if(savedMsg) {
-      document.getElementById('sofia-message-display').innerHTML =
-        `<b>Sofia's message for you:</b><br><span style="background:#fffbe7; border-radius:12px; padding:12px 18px; display:inline-block; margin-top:8px;">${savedMsg.replace(/\n/g, "<br>")}</span>`;
-    } else {
-      document.getElementById('sofia-message-display').innerHTML = '';
-    }
-  });
-
-  // --- Drawing Doodle (sync with Firebase) ---
-  const canvas = document.getElementById('drawing-canvas');
-  const ctx = canvas.getContext('2d');
-  let drawing = false;
-  let lastX = 0, lastY = 0;
-
-  canvas.addEventListener('mousedown', (e) => {
-    drawing = true;
-    [lastX, lastY] = [e.offsetX, e.offsetY];
-  });
-  canvas.addEventListener('mouseup', () => drawing = false);
-  canvas.addEventListener('mouseout', () => drawing = false);
-  canvas.addEventListener('mousemove', draw);
-
-  function draw(e) {
-    if (!drawing) return;
-    ctx.strokeStyle = '#b4a7ff';
-    ctx.lineWidth = 3;
-    ctx.lineCap = 'round';
-    ctx.beginPath();
-    ctx.moveTo(lastX, lastY);
-    ctx.lineTo(e.offsetX, e.offsetY);
-    ctx.stroke();
-    [lastX, lastY] = [e.offsetX, e.offsetY];
-  }
-
-  // Save doodle to Firebase
-  document.getElementById('save-doodle-btn').onclick = function() {
-    const dataURL = canvas.toDataURL();
-    db.ref('sofiaDoodle').set(dataURL);
-    document.getElementById('doodle-saved-msg').textContent = "Doodle saved, thank you!";
-  };
-
-  // Clear canvas and remove doodle from Firebase
-  document.getElementById('clear-doodle-btn').onclick = function() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    document.getElementById('doodle-saved-msg').textContent = "";
-    db.ref('sofiaDoodle').remove();
-  };
-
-  // Load saved doodle from Firebase on page load and on update
-  db.ref('sofiaDoodle').on('value', (snapshot) => {
-    const saved = snapshot.val();
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    if (saved) {
-      const img = new window.Image();
-      img.onload = function() {
-        ctx.drawImage(img, 0, 0);
-      };
-      img.src = saved;
-      document.getElementById('doodle-saved-msg').textContent = "Your saved doodle is loaded!";
-    } else {
-      document.getElementById('doodle-saved-msg').textContent = "";
-    }
-  });
+}
 </script>
 </body>
 </html>
